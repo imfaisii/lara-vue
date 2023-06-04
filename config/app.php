@@ -44,6 +44,8 @@ return [
 
     'debug' => (bool) env('APP_DEBUG', false),
 
+    'isS3Available' => env('AWS_BUCKET', ""),
+
     /*
     |--------------------------------------------------------------------------
     | Application URL
