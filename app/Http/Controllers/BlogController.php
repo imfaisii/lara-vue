@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\BlogResource;
 use App\Models\Blog;
 use App\Http\Requests\StoreBlogRequest;
 use App\Http\Requests\UpdateBlogRequest;
@@ -13,12 +14,17 @@ class BlogController extends Controller
 {
     use ApiResponseTrait;
 
+    public function __construct(protected BlogService $blogService)
+    {
+        //
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return $this->successResponse($this->blogService->index());
     }
 
     /**
@@ -27,9 +33,9 @@ class BlogController extends Controller
     public function store(StoreBlogRequest $request)
     {
         try {
-            $blog = BlogService::create($request->validated());
+            $blog = $this->blogService->create($request->validated());
 
-            return $this->successResponse($blog);
+            return $this->successResponse(new BlogResource($blog));
         } catch (Exception $e) {
             return $this->exceptionResponse($e);
         }
@@ -40,7 +46,7 @@ class BlogController extends Controller
      */
     public function show(Blog $blog)
     {
-        //
+        return new BlogResource($blog);
     }
 
     /**
@@ -48,7 +54,13 @@ class BlogController extends Controller
      */
     public function update(UpdateBlogRequest $request, Blog $blog)
     {
-        //
+        try {
+            $blog = $this->blogService->update($blog, $request->validated());
+
+            return new BlogResource($blog);
+        } catch (Exception $e) {
+            return $this->exceptionResponse($e);
+        }
     }
 
     /**
@@ -57,6 +69,16 @@ class BlogController extends Controller
     public function destroy(Blog $blog)
     {
         $blog->delete();
+
+        return response()->noContent();
+    }
+
+    /**
+     * Like blog.
+     */
+    public function like(Blog $blog)
+    {
+        $blog->like(auth()->id());
 
         return response()->noContent();
     }

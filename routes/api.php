@@ -25,5 +25,6 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 Route::group([
     'middleware' => 'auth:sanctum'
 ], function () {
-    Route::resource('blogs', BlogController::class)->except(['edit', 'create']);
+    Route::resource('/blogs', BlogController::class)->except(['edit', 'create']);
+    Route::get('/blogs/{blog}/like', [BlogController::class, 'like'])->name('like');
 });

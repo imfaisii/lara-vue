@@ -46,13 +46,11 @@ trait ApiResponseTrait
      * @param  int  $status
      * @return \Illuminate\Http\Response
      */
-    public function exceptionResponse(Exception $e)
+    public function exceptionResponse(Exception $e, $code = null)
     {
-        $status = Response::HTTP_INTERNAL_SERVER_ERROR;
-
         return response([
             'success' => false,
-            'message' => $e->getMessage(),
-        ], $e->getCode());
+            'message' => $e->errorInfo[2] ?? $e->getMessage() ?? Response::HTTP_INTERNAL_SERVER_ERROR,
+        ], $code ?? 500);
     }
 }
