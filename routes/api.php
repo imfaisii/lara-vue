@@ -20,6 +20,8 @@ use Tightenco\Ziggy\Ziggy;
 */
 
 
+/* AUTH ROUTES */
+
 Route::get('ziggy', fn () => response()->json(new Ziggy));
 
 Route::post('/register', [RegisteredUserController::class, 'store'])
@@ -30,12 +32,12 @@ Route::post('/login', [AuthenticatedSessionController::class, 'store'])
 
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy']);
 
-
+/* LOGGED USER */
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
+/* BLOGS ROUTES*/
 Route::group([
     'middleware' => 'auth:sanctum'
 ], function () {
