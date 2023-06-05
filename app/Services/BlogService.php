@@ -51,6 +51,11 @@ class BlogService
         return $blog;
     }
 
+    public function toggleLike(Blog $blog, int $userId): void
+    {
+        $blog->liked($userId) ? $blog->unlike($userId) : $blog->like($userId);
+    }
+
     private function upload($image): string
     {
         return !$this->isBucketAvailable

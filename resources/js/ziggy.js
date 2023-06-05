@@ -1,7 +1,0 @@
-const Ziggy = {"url":"http:\/\/lara-vue.website","port":null,"defaults":{},"routes":{"sanctum.csrf-cookie":{"uri":"sanctum\/csrf-cookie","methods":["GET","HEAD"]},"ignition.healthCheck":{"uri":"_ignition\/health-check","methods":["GET","HEAD"]},"ignition.executeSolution":{"uri":"_ignition\/execute-solution","methods":["POST"]},"ignition.updateConfig":{"uri":"_ignition\/update-config","methods":["POST"]},"register":{"uri":"api\/register","methods":["POST"]},"login":{"uri":"api\/login","methods":["POST"]},"password.email":{"uri":"api\/forgot-password","methods":["POST"]},"password.store":{"uri":"api\/reset-password","methods":["POST"]},"verification.verify":{"uri":"api\/verify-email\/{id}\/{hash}","methods":["GET","HEAD"]},"verification.send":{"uri":"api\/email\/verification-notification","methods":["POST"]},"logout":{"uri":"api\/logout","methods":["POST"]},"blogs.index":{"uri":"api\/blogs","methods":["GET","HEAD"]},"blogs.store":{"uri":"api\/blogs","methods":["POST"]},"blogs.show":{"uri":"api\/blogs\/{blog}","methods":["GET","HEAD"],"bindings":{"blog":"id"}},"blogs.update":{"uri":"api\/blogs\/{blog}","methods":["PUT","PATCH"],"bindings":{"blog":"id"}},"blogs.destroy":{"uri":"api\/blogs\/{blog}","methods":["DELETE"],"bindings":{"blog":"id"}},"like":{"uri":"api\/blogs\/{blog}\/like","methods":["GET","HEAD"],"bindings":{"blog":"id"}}}};
-
-if (typeof window !== 'undefined' && typeof window.Ziggy !== 'undefined') {
-    Object.assign(Ziggy.routes, window.Ziggy.routes);
-}
-
-export { Ziggy };

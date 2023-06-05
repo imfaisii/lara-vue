@@ -21,7 +21,7 @@ class Blog extends Model
 
     protected $with = ['likeCounter'];
 
-    protected $appends = ['image_url'];
+    protected $appends = ['image_url', 'has_liked'];
 
     public function getImageUrlAttribute()
     {
@@ -34,6 +34,11 @@ class Blog extends Model
         }
 
         return null;
+    }
+
+    public function getHasLikedAttribute()
+    {
+        return $this->liked(auth()->id());
     }
 
     public function user()

@@ -5,6 +5,8 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\BlogController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Tightenco\Ziggy\Ziggy;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +18,9 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+
+Route::get('ziggy', fn () => response()->json(new Ziggy));
 
 Route::post('/register', [RegisteredUserController::class, 'store'])
     ->name('register');
@@ -35,5 +40,5 @@ Route::group([
     'middleware' => 'auth:sanctum'
 ], function () {
     Route::resource('/blogs', BlogController::class)->except(['edit', 'create']);
-    Route::get('/blogs/{blog}/like', [BlogController::class, 'like'])->name('like');
+    Route::get('/blogs/{blog}/like', [BlogController::class, 'like'])->name('blogs.like');
 });

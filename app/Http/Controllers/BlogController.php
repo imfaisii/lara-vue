@@ -78,7 +78,7 @@ class BlogController extends Controller
      */
     public function like(Blog $blog)
     {
-        $blog->like(auth()->id());
+        $this->blogService->toggleLike($blog, auth()->id());
 
         return response()->noContent();
     }
