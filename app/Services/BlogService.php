@@ -18,13 +18,14 @@ class BlogService
     public function index(): LengthAwarePaginator
     {
         $searchQuery = request()->query('search');
+        $perPage = request()->get('rowsPerPage', 10);
 
         if ($searchQuery) {
             $blogs = Blog::where('title', 'like', "%$searchQuery%")
                 ->orWhere('body', 'like', "%$searchQuery%")
-                ->paginate(10);
+                ->paginate($perPage);
         } else {
-            $blogs = Blog::paginate(10);
+            $blogs = Blog::paginate($perPage);
         }
 
         return $blogs;
